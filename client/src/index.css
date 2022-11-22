@@ -1,0 +1,29 @@
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Nanum Myeongjo", serif;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #fbf5e9 30%, #fff 30%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  padding: 0;
+  margin: 0;
+}
+/* 638A73 */
+
+input {
+  border: 0;
+}
+
+#modal-root {
+  position: relative;
+  z-index: 999;
+}

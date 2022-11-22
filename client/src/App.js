@@ -1,13 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Cocktails from "./routes/Cocktails";
-import Cocktail from "./routes/Cocktail.js";
+import Home from "./pages/home/Home";
+import Cocktails from "./pages/cocktails/Cocktails";
+import Cocktail from "./pages/cocktails/Cocktail";
+import SearchResult from "./pages/search/SearchResult";
+import Layout from "./UI/Layout";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Cocktails />}/>
-        <Route path="/:id" element={<Cocktail />}/>
+        <Route element={<Layout />}> 
+          <Route path="/" element={<Home />} />
+          <Route path="/cocktails" element={<Cocktails />} />
+          <Route path="/cocktails/:id" element={<Cocktail />} />
+          <Route path="/search/:keyword" element={<SearchResult />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
