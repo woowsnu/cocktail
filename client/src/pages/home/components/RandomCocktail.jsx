@@ -75,10 +75,6 @@ const Info = styled.div`
   padding-left: 2rem;
   color: #101b45;
 
-  /* a {
-    margin-left: auto;
-  } */
-
   h1 {
     padding-bottom: 1.2rem;
     color: #101b45;

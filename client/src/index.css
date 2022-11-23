@@ -23,6 +23,26 @@ input {
   border: 0;
 }
 
+button {
+  border: 0;
+  background-color: transparent;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a,
+a:hover,
+a:visited,
+a:focus {
+  text-decoration: none;
+  color: #000;
+}
+
 #modal-root {
   position: relative;
   z-index: 999;

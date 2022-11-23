@@ -11,16 +11,16 @@ const typeDefs = gql`
     strGlass: String!
     strInstructions: String!
     strDrinkThumb: String!
-    strIngredient1: String!
-    strIngredient2: String!
-    strIngredient3: String!
-    strIngredient4: String!
-    strIngredient5: String!
-    strMeasure1: String!
-    strMeasure2: String!
-    strMeasure3: String!
-    strMeasure4: String!
-    strMeasure5: String!
+    strIngredient1: String
+    strIngredient2: String
+    strIngredient3: String
+    strIngredient4: String
+    strIngredient5: String
+    strMeasure1: String
+    strMeasure2: String
+    strMeasure3: String
+    strMeasure4: String
+    strMeasure5: String
     strImageSource: String!
     strImageAttribution: String!
     strCreativeCommonsConfirmed: String!

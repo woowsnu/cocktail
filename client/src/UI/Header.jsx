@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Search from "../pages/search/Search";
 
 const Header = () => {
-  // const { pathname } = useLocation();
-  // const isSearch = pathname.includes("search") ? "none" : "flex";
   const [searchView, setSearchView] = useState(false);
 
   const handleOpenSearch = () => {
@@ -15,8 +13,7 @@ const Header = () => {
 
   return (
     <Container>
-    {/* <Container style={{ display: isSearch }}> */}
-      <Logo>Today's Cocktail</Logo>
+      <Logo><Link to="/">Today's Cocktail</Link></Logo>
       <Util>
         <AiOutlineSearch onClick={handleOpenSearch} />
         <AiOutlineMenu />
