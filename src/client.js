@@ -1,9 +1,12 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: "https://today-cocktail.herokuapp.com/",
   cache: new InMemoryCache(),
-  connectToDevTools: true
+  connectToDevTools: true,
+  fetchOptions: {
+    mode: 'no-cors',
+  },
 });
 
 export default client;
