@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Search from "../pages/search/Search";
@@ -16,7 +16,7 @@ const Header = () => {
       <Logo><Link to="/">Today's Cocktail</Link></Logo>
       <Util>
         <AiOutlineSearch onClick={handleOpenSearch} />
-        <AiOutlineMenu />
+        <AiOutlineHeart />
       </Util>
       {searchView ? <Search onClose={()=>{setSearchView(false)}}/> : ""}
     </Container>

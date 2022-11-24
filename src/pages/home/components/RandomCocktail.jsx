@@ -1,4 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
+import { useSelector } from "react-redux";
+import { AiOutlineRetweet, AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
 
 const RANDOM_COCKTAIL = gql`
@@ -10,14 +12,22 @@ const RANDOM_COCKTAIL = gql`
       strAlcoholic
       strDrinkThumb
       strInstructions
+      strIngredient1
+      strIngredient2
+      strIngredient3
+      strIngredient4
+      strIngredient5
     }
   }
 `;
 
 const RandomCocktail = () => {
   const { data, loading, error } = useQuery(RANDOM_COCKTAIL);
+  const likes = useSelector(state => state.list);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>에러가 발생했습니다.</div>;
+
   return (
     <Container>
       <Img
@@ -25,26 +35,32 @@ const RandomCocktail = () => {
         alt={data?.randomCocktail[0].strDrink}
       />
       <Info>
-        {/* <a href="#">다시 추천받기</a> */}
+        <AiOutlineRetweet />
+        <AiOutlineHeart />
         <h1>{data?.randomCocktail[0].strDrink}</h1>
         <h2>{data?.randomCocktail[0].strInstructions}</h2>
         <List>
-          <h3>category / alcoholic</h3>
-          <p>{data?.randomCocktail[0].strCategory} | {data?.randomCocktail[0].strAlcoholic}</p>
+          <h3>category</h3>
+          <p>{data?.randomCocktail[0].strCategory}</p>
         </List>
         <List>
-          <h3>category</h3>
+          <h3>alcoholic</h3>
           <p>{data?.randomCocktail[0].strAlcoholic}</p>
         </List>
         <List>
-          <h3>category</h3>
-          <p>{data?.randomCocktail[0].strCategory}</p>
+          <h3>Ingredient</h3>
+          <p>
+            <span>{data?.randomCocktail[0].strIngredient1}</span>
+            <span>{data?.randomCocktail[0].strIngredient2}</span>
+            <span>{data?.randomCocktail[0].strIngredient3}</span>
+            <span>{data?.randomCocktail[0].strIngredient4}</span>
+            <span>{data?.randomCocktail[0].strIngredient5}</span>
+          </p>
         </List>
         <List>
           <h3>category</h3>
           <p>{data?.randomCocktail[0].strCategory}</p>
         </List>
-        {/* <AiOutlineRetweet /> */}
       </Info>
     </Container>
   );
