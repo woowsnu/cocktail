@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
-import { useSelector } from "react-redux";
 import { AiOutlineRetweet, AiOutlineHeart } from "react-icons/ai";
 import styled from "styled-components";
+import Skeleton from "../../../UI/Skeleton";
 
 const RANDOM_COCKTAIL = gql`
   query randomCocktial {
@@ -23,46 +23,55 @@ const RANDOM_COCKTAIL = gql`
 
 const RandomCocktail = () => {
   const { data, loading, error } = useQuery(RANDOM_COCKTAIL);
-  const likes = useSelector(state => state.list);
 
-  if (loading) return <div>Loading...</div>;
+  const handleRetry = () => {
+    window.location.reload();
+  };
+
+  // if (loading) return <Skeleton />;
   if (error) return <div>에러가 발생했습니다.</div>;
 
   return (
-    <Container>
-      <Img
-        src={data?.randomCocktail[0].strDrinkThumb}
-        alt={data?.randomCocktail[0].strDrink}
-      />
-      <Info>
-        <AiOutlineRetweet />
-        <AiOutlineHeart />
-        <h1>{data?.randomCocktail[0].strDrink}</h1>
-        <h2>{data?.randomCocktail[0].strInstructions}</h2>
-        <List>
-          <h3>category</h3>
-          <p>{data?.randomCocktail[0].strCategory}</p>
-        </List>
-        <List>
-          <h3>alcoholic</h3>
-          <p>{data?.randomCocktail[0].strAlcoholic}</p>
-        </List>
-        <List>
-          <h3>Ingredient</h3>
-          <p>
-            <span>{data?.randomCocktail[0].strIngredient1}</span>
-            <span>{data?.randomCocktail[0].strIngredient2}</span>
-            <span>{data?.randomCocktail[0].strIngredient3}</span>
-            <span>{data?.randomCocktail[0].strIngredient4}</span>
-            <span>{data?.randomCocktail[0].strIngredient5}</span>
-          </p>
-        </List>
-        <List>
-          <h3>category</h3>
-          <p>{data?.randomCocktail[0].strCategory}</p>
-        </List>
-      </Info>
-    </Container>
+    <>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <Container>
+          <Img
+            src={data?.randomCocktail[0].strDrinkThumb}
+            alt={data?.randomCocktail[0].strDrink}
+          />
+          <Info>
+            <AiOutlineRetweet onClick={handleRetry} />
+            <AiOutlineHeart />
+            <h1>{data?.randomCocktail[0].strDrink}</h1>
+            <h2>{data?.randomCocktail[0].strInstructions}</h2>
+            <List>
+              <h3>category</h3>
+              <p>{data?.randomCocktail[0].strCategory}</p>
+            </List>
+            <List>
+              <h3>alcoholic</h3>
+              <p>{data?.randomCocktail[0].strAlcoholic}</p>
+            </List>
+            <List>
+              <h3>Ingredient</h3>
+              <p>
+                <span>{data?.randomCocktail[0].strIngredient1}</span>
+                <span>{data?.randomCocktail[0].strIngredient2}</span>
+                <span>{data?.randomCocktail[0].strIngredient3}</span>
+                <span>{data?.randomCocktail[0].strIngredient4}</span>
+                <span>{data?.randomCocktail[0].strIngredient5}</span>
+              </p>
+            </List>
+            <List>
+              <h3>category</h3>
+              <p>{data?.randomCocktail[0].strCategory}</p>
+            </List>
+          </Info>
+        </Container>
+      )}
+    </>
   );
 };
 

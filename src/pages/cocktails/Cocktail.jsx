@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
+import Skeleton from "../../UI/Skeleton";
 
 const GET_COCKTAIL_BY_ID = gql`
   query GetCocktailDetail($drinkId: String!) {
@@ -36,7 +37,6 @@ const Cocktail = () => {
 
   const detailData = data?.getCocktailById[0];
 
-  if (loading) return <div>Loading</div>;
   if (error) return <div>에러가 발생했습니다. 잠시 후 다시 시도해주세요.</div>;
 
   const handleLikes = () => {
@@ -55,40 +55,43 @@ const Cocktail = () => {
   };
 
   return (
-    <Container>
-      <Img
-        src={detailData.strDrinkThumb}
-        alt={detailData.strDrink}
-      />
-      <Info>
-        {/* <a href="#">다시 추천받기</a> */}
-        <h1>{detailData.strDrink}</h1>
-        <h2>{detailData.strInstructions}</h2>
-        <List>
-          <h3>category</h3>
-          <p>{detailData.strCategory}</p>
-        </List>
-        <List>
-          <h3>alcoholic</h3>
-          <p>{detailData.strAlcoholic}</p>
-        </List>
-        <List>
-          <h3>Ingredient</h3>
-          <p>
-            <span>{detailData.strIngredient1}</span>
-            <span>{detailData.strIngredient2}</span>
-            <span>{detailData.strIngredient3}</span>
-            <span>{detailData.strIngredient4}</span>
-            <span>{detailData.strIngredient5}</span>
-          </p>
-        </List>
-        <List>
-          <h3>category</h3>
-          <p>{detailData.strCategory}</p>
-        </List>
-        {/* <AiOutlineRetweet /> */}
-      </Info>
-    </Container>
+    <>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <Container>
+          <Img src={detailData.strDrinkThumb} alt={detailData.strDrink} />
+          <Info>
+            {/* <a href="#">다시 추천받기</a> */}
+            <h1>{detailData.strDrink}</h1>
+            <h2>{detailData.strInstructions}</h2>
+            <List>
+              <h3>category</h3>
+              <p>{detailData.strCategory}</p>
+            </List>
+            <List>
+              <h3>alcoholic</h3>
+              <p>{detailData.strAlcoholic}</p>
+            </List>
+            <List>
+              <h3>Ingredient</h3>
+              <p>
+                <span>{detailData.strIngredient1}</span>
+                <span>{detailData.strIngredient2}</span>
+                <span>{detailData.strIngredient3}</span>
+                <span>{detailData.strIngredient4}</span>
+                <span>{detailData.strIngredient5}</span>
+              </p>
+            </List>
+            <List>
+              <h3>category</h3>
+              <p>{detailData.strCategory}</p>
+            </List>
+            {/* <AiOutlineRetweet /> */}
+          </Info>
+        </Container>
+      )}
+    </>
   );
 };
 
@@ -146,6 +149,3 @@ const List = styled.div`
     color: #999;
   }
 `;
-
-
-
