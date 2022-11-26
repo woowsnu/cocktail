@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
+import { AiOutlineShareAlt } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import Likes from "../../UI/Likes";
 import styled from "styled-components";
@@ -42,7 +43,7 @@ const Cocktail = () => {
   }, [id]);
 
   const handleShare = () => {
-    const url = `https://cocktail-pied.vercel.app/cocktail/${id}`
+    const url = `https://cocktail-pied.vercel.app/cocktail/${id}`;
     if (navigator.share) {
       navigator.share({
         title: "Today's Cocktail",
@@ -70,7 +71,7 @@ const Cocktail = () => {
                   handleShare();
                 }}
               >
-                공유하기
+                <AiOutlineShareAlt />
               </div>
               <Likes id={detailData.idDrink} isLiked={presentLike} />
             </BtnWrap>
@@ -114,6 +115,12 @@ const Container = styled.div`
   padding-top: 3rem;
   display: flex;
   justify-content: flex-start;
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 0;
+  }
 `;
 
 const Img = styled.img`
@@ -121,7 +128,14 @@ const Img = styled.img`
   height: 600px;
   overflow: hidden;
   object-fit: cover;
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+  }
 `;
+
 const Info = styled.div`
   position: relative;
   display: flex;
@@ -145,12 +159,41 @@ const Info = styled.div`
     letter-spacing: -0.3px;
     line-height: 1.2;
   }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    box-sizing: border-box;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.6rem;
+
+    h1 {
+      padding-bottom: 1.2rem;
+      color: #101b45;
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+  }
 `;
 
 const BtnWrap = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+
+  div {
+    display: none;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+
+    div {
+      display: block;
+      font-size: 1.8rem;
+    }
+  }
 `;
 
 const List = styled.div`
@@ -164,5 +207,11 @@ const List = styled.div`
 
   p {
     color: #999;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    p {
+      word-break: break-all;
+    }
   }
 `;

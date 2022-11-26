@@ -10,7 +10,7 @@ const Search = (props) => {
   const [enteredKeyword, setEnteredKeyword] = useState("");
   const [keywordArr, setKeywordArr] = useState(null);
   const [isUnvalid, setIsUnvalid] = useState(false);
-  
+
   useEffect(() => {
     if (enteredKeyword.trim().length === 0) {
       setKeywordArr(null);
@@ -85,7 +85,7 @@ const Search = (props) => {
                       handleKeywordSearch(keyword.strDrink);
                     }}
                   >
-                  {highlightText(keyword.strDrink, enteredKeyword)}
+                    {highlightText(keyword.strDrink, enteredKeyword)}
                   </li>
                 ))}
               </SearchKeyword>
@@ -107,11 +107,17 @@ const Container = styled.div`
 `;
 
 const Wrap = styled.div`
+  box-sizing: border-box;
+  width: 100%;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   margin: 0 auto;
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    padding: 0 0.6rem;
+  }
 `;
 
 const Btn = styled.button`
@@ -140,6 +146,17 @@ const SearchBar = styled.form`
     padding: 0.4rem 0;
     font-size: 2rem;
     font-weight: 800;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    margin-top: 8vh;
+
+    input {
+      width: 100%;
+      height: 40px;
+      font-size: 2rem;
+      border-bottom: 2px solid #000;
+    }
   }
 `;
 

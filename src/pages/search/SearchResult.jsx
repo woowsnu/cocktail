@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Pagination from "../../UI/Pagination";
 import SearchResultItem from "./SearchResultItem";
+import Loading from "../../UI/Loading";
 
 const COCKTAILS_BY_NAME = gql`
   query getCocktailsByName($name: String!) {
@@ -63,7 +64,7 @@ const SearchResult = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러가 발생했습니다.</div>;
   return (
     <Container>
@@ -83,7 +84,11 @@ const SearchResult = () => {
         {data?.getCocktailsByName
           ?.slice(offset, offset + limit)
           .map((cocktail) => (
-            <SearchResultItem key={cocktail.idDrink} cocktail={cocktail} listUpdate={handleUpdate}/>
+            <SearchResultItem
+              key={cocktail.idDrink}
+              cocktail={cocktail}
+              listUpdate={handleUpdate}
+            />
           ))}
       </Ul>
       <PageWrap>
@@ -126,6 +131,16 @@ const SearchBar = styled.form`
     padding: 0.4rem 0;
     font-size: 2rem;
     font-weight: 800;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+
+    input {
+      padding: 0 0.6rem;
+  }
   }
 `;
 

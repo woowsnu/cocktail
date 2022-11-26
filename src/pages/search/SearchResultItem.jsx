@@ -60,8 +60,18 @@ const Li = styled.li`
   background-color: #fff;
   border-bottom: 1px solid #999;
   padding-right: 1.4rem;
+
   img {
     width: 150px;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    padding-right: 1rem;
+  
+  img {
+    width: 120px;
+    height: 120px;
+  }
   }
 `;
 
@@ -90,5 +100,22 @@ const Info = styled.div`
     font-size: 0.8rem;
     padding-right: 1rem;
     color: #999;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    padding-left: 1rem;
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+  }
+
+  p {
+    padding-top: 0.4rem;
+  }
+
+  span {
+    display: none;
+  }
   }
 `;

@@ -34,10 +34,13 @@ const Header = () => {
         {likeCount > 0 ? (
           <div onClick={handleOpenLikes}>
             <span>{likeCount}</span>
-            <AiFillHeart style={{ color: "#f84848"}}/>
+            <AiFillHeart style={{ color: "#f84848" }} />
           </div>
         ) : (
-          <AiOutlineHeart onClick={handleOpenLikes} style={{ color: "#f84848"}}/>
+          <AiOutlineHeart
+            onClick={handleOpenLikes}
+            style={{ color: "#f84848" }}
+          />
         )}
       </Util>
       {searchView ? (
@@ -56,13 +59,12 @@ const Header = () => {
 export default Header;
 
 const Container = styled.header`
-  max-width: 1200px;
+box-sizing: border-box;
   width: 100%;
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
   padding: 0 1.2rem;
 `;
 
@@ -78,6 +80,8 @@ const Logo = styled.div`
 `;
 
 const Util = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 1.8rem;
 
   div {
@@ -98,6 +102,12 @@ const Util = styled.div`
   }
 
   & :last-child {
-    margin-left: 0.6rem;
+    padding-left: 0.6rem;
+  }
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    & :last-child {
+    padding-left: 0.3rem;
+  }
   }
 `;

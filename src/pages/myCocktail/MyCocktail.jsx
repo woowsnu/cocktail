@@ -3,6 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components";
 import SearchResultItem from "../search/SearchResultItem";
 import Pagination from "../../UI/Pagination";
+import Loading from "../../UI/Loading";
 
 const GET_COCKTAIL_BY_IDS = gql`
   query GetCocktailsDetail($drinkId: [String!]!) {
@@ -42,7 +43,7 @@ const MyCocktail = () => {
     setListUpdate(!listUpdate);
   }
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러가 발생했습니다.</div>;
   return (
     <Container>
@@ -73,7 +74,13 @@ export default MyCocktail;
 
 const Container = styled.div`
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 1rem;
+
+  h1 {
+    text-align: center;
+    font-weight: 800;
+    padding-bottom: 1.4rem;
+  }
 `;
 
 const Ul = styled.ul`
