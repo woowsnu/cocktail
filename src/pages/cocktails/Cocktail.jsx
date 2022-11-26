@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { share } from "../../utils/share";
 import Likes from "../../UI/Likes";
 import styled from "styled-components";
 import Skeleton from "../../UI/Skeleton";
