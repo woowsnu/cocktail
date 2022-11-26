@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import { share } from "../../utils/share";
 import Likes from "../../UI/Likes";
 import styled from "styled-components";
 import Skeleton from "../../UI/Skeleton";
@@ -41,6 +42,19 @@ const Cocktail = () => {
     }
   }, [id]);
 
+  const handleShare = () => {
+    const url = `https://cocktail-pied.vercel.app/cocktail/${id}`
+    if (navigator.share) {
+      navigator.share({
+        title: "Today's Cocktail",
+        text: "아갓시를 위한...",
+        url: url,
+      });
+    } else {
+      alert("공유하기가 지원되지 않는 환경 입니다.");
+    }
+  };
+
   if (error) return <div>에러가 발생했습니다. 잠시 후 다시 시도해주세요.</div>;
 
   return (
@@ -52,6 +66,13 @@ const Cocktail = () => {
           <Img src={detailData.strDrinkThumb} alt={detailData.strDrink} />
           <Info>
             <BtnWrap>
+              <div
+                onClick={() => {
+                  handleShare();
+                }}
+              >
+                공유하기
+              </div>
               <Likes id={detailData.idDrink} isLiked={presentLike} />
             </BtnWrap>
             <h1>{detailData.strDrink}</h1>
