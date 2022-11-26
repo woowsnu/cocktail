@@ -37,10 +37,19 @@ const SkeletonContainer = styled.div`
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    flex-direction: column;
+    padding-top: 2rem;
+  }
 `;
 
 const SkeletonWrap = styled.div`
   width: 50%;
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ProductSkeleton = styled.div`
@@ -62,4 +71,9 @@ const PictureSkeleton = styled(ProductSkeleton)`
   height: 600px;
   margin: auto;
   display: block;
+
+  @media only screen and (min-width: 360px) and (max-width: 768px) {
+    width: 100%;
+    height: 300px;
+  }
 `;
