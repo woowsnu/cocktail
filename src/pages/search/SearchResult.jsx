@@ -29,6 +29,7 @@ const SearchResult = () => {
   const [enteredKeyword, setEnteredKeyword] = useState(keyword);
   const [isUnvalid, setIsUnvalid] = useState(false);
   const [isResearch, setIsResearch] = useState(false);
+  const [listUpdate, setListUpdate] = useState(false);
   const [limit, setLimit] = useState(7);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
@@ -39,6 +40,10 @@ const SearchResult = () => {
 
   const handleKeyword = (e) => {
     setEnteredKeyword(e.target.value);
+  };
+
+  const handleUpdate = () => {
+    setListUpdate(!listUpdate);
   };
 
   const handleDeleteKeyword = (e) => {
@@ -78,7 +83,7 @@ const SearchResult = () => {
         {data?.getCocktailsByName
           ?.slice(offset, offset + limit)
           .map((cocktail) => (
-            <SearchResultItem key={cocktail.idDrink} cocktail={cocktail} />
+            <SearchResultItem key={cocktail.idDrink} cocktail={cocktail} listUpdate={handleUpdate}/>
           ))}
       </Ul>
       <PageWrap>

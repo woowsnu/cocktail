@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { AiOutlineRetweet, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineRetweet } from "react-icons/ai";
 import styled from "styled-components";
 import Skeleton from "../../../UI/Skeleton";
+import Likes from "../../../UI/Likes";
 
 const RANDOM_COCKTAIL = gql`
   query randomCocktial {
@@ -17,18 +19,27 @@ const RANDOM_COCKTAIL = gql`
       strIngredient3
       strIngredient4
       strIngredient5
+      strGlass
     }
   }
 `;
 
 const RandomCocktail = () => {
+  const [presentLike, setPresentLike] = useState(false);
   const { data, loading, error } = useQuery(RANDOM_COCKTAIL);
+  const randomData = data?.randomCocktail[0];
+
+  useEffect(() => {
+    let likeList = localStorage.getItem("likes");
+    if (likeList && likeList.includes(randomData?.idDrink)) {
+      setPresentLike(true);
+    }
+  },[setPresentLike, randomData?.idDrink]);
 
   const handleRetry = () => {
     window.location.reload();
   };
 
-  // if (loading) return <Skeleton />;
   if (error) return <div>에러가 발생했습니다.</div>;
 
   return (
@@ -42,8 +53,10 @@ const RandomCocktail = () => {
             alt={data?.randomCocktail[0].strDrink}
           />
           <Info>
-            <AiOutlineRetweet onClick={handleRetry} />
-            <AiOutlineHeart />
+            <BtnWrap>
+              <AiOutlineRetweet onClick={handleRetry} />
+              <Likes id={randomData?.idDrink} isLiked={presentLike} />
+            </BtnWrap>
             <h1>{data?.randomCocktail[0].strDrink}</h1>
             <h2>{data?.randomCocktail[0].strInstructions}</h2>
             <List>
@@ -65,8 +78,8 @@ const RandomCocktail = () => {
               </p>
             </List>
             <List>
-              <h3>category</h3>
-              <p>{data?.randomCocktail[0].strCategory}</p>
+              <h3>glass</h3>
+              <p>{data?.randomCocktail[0].strGlass}</p>
             </List>
           </Info>
         </Container>
@@ -93,6 +106,7 @@ const Img = styled.img`
   object-fit: cover;
 `;
 const Info = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -114,6 +128,13 @@ const Info = styled.div`
     letter-spacing: -0.3px;
     line-height: 1.2;
   }
+`;
+
+const BtnWrap = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.8rem;
 `;
 
 const List = styled.div`

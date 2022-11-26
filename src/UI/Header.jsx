@@ -1,24 +1,54 @@
-import { useState } from "react";
-import { AiOutlineSearch, AiOutlineHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { AiOutlineSearch, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "../pages/search/Search";
 
 const Header = () => {
+  const navigation = useNavigate();
   const [searchView, setSearchView] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
+  useEffect(() => {
+    const parseArr = JSON.parse(localStorage.getItem("likes"));
+    if (parseArr) {
+      setLikeCount(parseArr.length);
+    }
+  });
 
   const handleOpenSearch = () => {
     setSearchView(!searchView);
   };
 
+  const handleOpenLikes = () => {
+    navigation("/myCocktail", { replace: true });
+  };
+
   return (
     <Container>
-      <Logo><Link to="/">Today's Cocktail</Link></Logo>
+      <Logo>
+        <Link to="/">Today's Cocktail</Link>
+      </Logo>
       <Util>
         <AiOutlineSearch onClick={handleOpenSearch} />
-        <AiOutlineHeart />
+        {likeCount > 0 ? (
+          <div onClick={handleOpenLikes}>
+            <span>{likeCount}</span>
+            <AiFillHeart style={{ color: "#f84848"}}/>
+          </div>
+        ) : (
+          <AiOutlineHeart onClick={handleOpenLikes} style={{ color: "#f84848"}}/>
+        )}
       </Util>
-      {searchView ? <Search onClose={()=>{setSearchView(false)}}/> : ""}
+      {searchView ? (
+        <Search
+          onClose={() => {
+            setSearchView(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
     </Container>
   );
 };
@@ -49,6 +79,23 @@ const Logo = styled.div`
 
 const Util = styled.div`
   font-size: 1.8rem;
+
+  div {
+    position: relative;
+    span {
+      position: absolute;
+      font-size: 0.6rem;
+      top: 0;
+      right: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 100%;
+      background-color: #ff0000;
+      color: #fff;
+      text-align: center;
+      line-height: 16px;
+    }
+  }
 
   & :last-child {
     margin-left: 0.6rem;

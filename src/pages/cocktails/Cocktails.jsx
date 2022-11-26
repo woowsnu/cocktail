@@ -32,13 +32,3 @@ const Cocktails = () => {
 };
 
 export default Cocktails;
-
-// const [Cocktails, setCocktails] = useState([]);
-// const client = useApolloClient();
-// useEffect(() => {
-//   client
-//     .query({
-//       query: gql``,
-//     })
-//     .then((result) => setCocktails(result.data.searchCocktailByName));
-// }, []);

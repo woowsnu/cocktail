@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../UI/Modal";
-import { highlightText } from "./highlightText";
+import { highlightText } from "../../utils/highlightText";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 
