@@ -2,34 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" href="./favicon.ico" />
+    <link rel="short icon" type="image/x-icon" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
     <meta
-      name="description"
-      content="Web site created using create-react-app"
+      name="Today's Cocktail"
+      content="
+      Find Your Own Cocktail"
     />
+    <!-- Open Graph (Facebook, Linkedin) -->
+    <!-- https://ourcodeworld.com/public-media/articles/articleocw-56d1a6901b773.png -->
+    <meta propery="og:type" content="website" />
+    <!-- https://ogp.me/#types -->
+    <meta property="og:title" content="Today's Cocktail" />
+    <meta
+      property="og:description"
+      content="Find Your Own Cocktail!"/>
+    <meta property="og:image" content="./og-img.png" />
+    <meta property="og:url" content="https://cocktail-pied.vercel.app" />
+    <meta property="og:site_name" content="Today's Cocktail" />
+
+    <!-- twitter card (Twitter) -->
+    <!-- https://csharpcorner-mindcrackerinc.netdna-ssl.com/article/twitter-cards-implementation-with-websites/Images/summary_card_tweet.png -->
+    <meta name="twitter:card" content="summary" />
+    <!-- card 종류: summary, photo, player -->
+    <meta name="twitter:title" content="Today's Cocktail" />
+    <meta
+      name="twitter:description"
+      content="Find Your Own Cocktail!"
+    />
+    <meta name="twitter:image" content="./og-img.png" />
+    <meta name="twitter:url" content="https://cocktail-pied.vercel.app" />
+    <meta name="twitter:creator" content="Moon" />
+
+    <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>React App</title>
+    <title>Today's Cocktail</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="modal-root"></div>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
