@@ -1,70 +1,115 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Today's Cocktail 🍸
 
-## Available Scripts
+- 랜덤 칵테일을 추천받고, 칵테일 정보를 검색할 수 있는 서비스
+- 사용 api : https://www.thecocktaildb.com/api.php
+- 개인프로젝트 | 2022.11.20~ (진행중) 
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+## 배포 링크
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [링크🍹](https://cocktail-pied.vercel.app/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br>
 
-### `yarn test`
+## 목차
+- [기술스택](#기술-스택)
+- [와이어프레임](#와이어프레임)
+- [실행방법](#실행방법)
+- [프로젝트 구조](#프로젝트-구조)
+- [구현내용](#구현기능)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `yarn build`
+## 기술 스택
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- JavaScript, React(CRA)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- styled-components, React-icons
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- graphql, apollo client
 
-### `yarn eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 와이어프레임
+<img width="889" alt="Screen Shot 2022-11-28 at 12 04 30 PM" src="https://user-images.githubusercontent.com/105709187/204182729-4fc3486c-0057-4bc9-ae1e-86bae6c1e92b.png">
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 실행방법
 
-## Learn More
+1. Install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+ $ yarn install
+```
+2. start the project
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+ $ yarn start
+```
 
-### Code Splitting
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 프로젝트 구조
+```
+📦src
+ ┣ 📂UI
+ ┃ ┣ 📜Header.jsx
+ ┃ ┣ 📜Layout.jsx
+ ┃ ┣ 📜Likes.jsx
+ ┃ ┣ 📜Loading.jsx
+ ┃ ┣ 📜Modal.jsx
+ ┃ ┣ 📜Pagination.jsx
+ ┃ ┗ 📜Skeleton.jsx
+ ┣ 📂pages
+ ┃ ┣ 📂cocktails
+ ┃ ┃ ┣ 📜Cocktail.jsx
+ ┃ ┃ ┗ 📜Cocktails.jsx
+ ┃ ┣ 📂home
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┗ 📜RandomCocktail.jsx
+ ┃ ┃ ┗ 📜Home.jsx
+ ┃ ┣ 📂myCocktail
+ ┃ ┃ ┗ 📜MyCocktail.jsx
+ ┃ ┗ 📂search
+ ┃ ┃ ┣ 📜Search.jsx
+ ┃ ┃ ┣ 📜SearchResult.jsx
+ ┃ ┃ ┗ 📜SearchResultItem.jsx
+ ┣ 📂utils
+ ┃ ┣ 📜highlightText.js
+ ┣ 📜App.js
+ ┣ 📜client.js
+ ┣ 📜index.css
+ ┗ 📜index.js
+```
+<br>
 
-### Analyzing the Bundle Size
+## 구현내용
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**[공통]**
+  - 필요한 데이터만 사용하기 위해 Rest API 를 graphql로 마이그레이션
+  - apollo client 의 useQuery hook을 사용해 loading, error 처리
+  - loading 시 스켈레톤, 스피너 UI 적용
+  - 반응형 미디어 쿼리 적용
+  - 하트 버튼 클릭 시 localStorage에 cocktail id 저장
+ 
+**[메인페이지]**
+  - 랜덤 칵테일 api의 데이터를 query해 화면 노출
+  - retry 버튼 클릭 시 페이지 새로고침되며 새로운 랜덤 칵테일 정보로 화면 업데이트
+  - 하트 클릭 시 My Cocktail 에 추가, 제거됨
 
-### Making a Progressive Web App
+**[검색 화면]**
+  - 키워드 입력 시 검색바 하단에 추천 검색어 표시 (키워드가 포함된 칵테일 이름)
+  - 추천 검색어에 입력된 키워드와 일치하는 부분 볼드 처리
+  - 추천 검색어 클릭 시 해당 키워드의 검색결과로 이동
+	  - **이슈** 
+		  - 검색어 입력되지 않을 시 return 처리가 제대로 적용되지 않아 수정 필요
+	  - **To-Be**
+		  - 키보드로 추천 검색어로 이동되도록 처리
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**[칵테일 리스트 페이지 - 검색 결과 화면&MyCocktail ]** 
+  - 검색결과 7개마다 페이지네이션 적용
+  - 리스트 우측의 하트 클릭 시 MyCocktail에 추가, 제거됨
